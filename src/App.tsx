@@ -1,17 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {Accordion} from "./components/Accordion/Accordion";
 
 import {Rating} from "./components/Rating/Rating";
 import {OnOff} from "./components/OnOff/OnOff";
+import {UncontrolledAccordion} from "./components/UncontrolledAccordion/UncontrolledAccordion";
+import {UncontrolledOnOff} from "./components/UncontrolledOnOff/UncontrolledOnOff";
 
 function App() {
+
+    let [acrdn, setAcrdn] = useState<boolean>(true);
+    let [switchOn, setSwitchOn] = useState<boolean>(false);
     return (
-        <div>
-            <Accordion titleValue={'menu'} collapsed={true}/>
-            <Accordion titleValue={'menu 2'} collapsed={false}/>
-            <Rating value={3}/>
-            <OnOff on={true}/>
+        <div className={'App'}>
+            <Rating/>
+            {/*<OnOff on={switchOn}*/}
+            {/*       onChange={setSwitchOn}/>*/}
+
+            <Accordion titleValue={'Menu'}
+                       onChange={()=> setAcrdn(!acrdn)}
+                       collapsed={acrdn}/>
+
+            <UncontrolledOnOff onChange={setSwitchOn}/> {switchOn.toString()}
         </div>
     );
 }
